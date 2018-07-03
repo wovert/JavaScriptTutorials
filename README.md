@@ -74,10 +74,6 @@ DOM is tree type structure
 
 `element.appendChild()` 向元素添加新的节点，作为最有一个子节点
 
-`element.firstChild` 返回元素的首个子节点
-
-`element.lastChild` 返回元素的首个最有一个子元素
-
 `element.getAttribute('attribute')` 返回只读的元素的属性值
 
 `element.setAttribute('attribute', 'value')` 设置元素的属性值
@@ -105,6 +101,61 @@ DOM is tree type structure
 `element.attributes[0].nodeType == 2`
 
 `element.attributes[0].id` 属性值
+
+`element.firstChild` 返回只读元素的首个子节点
+
+标准：firstChild 会包含文本类型的节点
+非标准：只包含元素节点
+
+`element.firstElementChild` 返回只读元素的首个子节点（标准）
+
+非标准IE不支持firstElementChild
+
+``` js
+if (ele.firstElementChild) {
+  ele.firstElementChild.style.background = 'red;
+} else {
+  ele.firstChild.sytle.background = 'red';
+}
+var ele = ele.firstElementChild || ele.firstChild;
+ele.style.background = 'red';
+```
+
+``` js
+<ul id="list"> </ul>
+var ele = document.getElementById('list');
+var eleChild = ele.firstElementChild || ele.firstChild;
+IE9下 eleChild 是文本节点
+
+解决方案：
+if (ele.children[0]) {
+  ele.children[0].style.background = 'red';
+}
+```
+
+`element.lastChild` 返回只读元素的最后一个子节点
+
+`element.lastElementChild` 返回只读元素的最后一个子元素
+
+`element.nextSibling` 返回只读元素的下一个兄弟节点
+
+`element.nextElementSibling` 返回只读元素的下一个兄弟元素
+
+`element.previousSibling` 返回只读元素的上一个兄弟节点
+
+`element.previousElementSibling` 返回只读元素的上一个兄弟元素
+
+上一个或下一个节点有可能是文本节点如何处理？
+
+`ele.parentNode` 当前元素的只读父节点
+
+`ele.offsetParent` 当前元素的只读离当前元素最近的一个有定位的父节点，没有定位，则默认body
+
+IE7 下如果当前元素没有定位默认是body, 如果有定位，则是html
+
+IE7下，如果当前元素的某个父级触发了 layout, 那么 offsetParent 就会指向到了这个触发了 layout 特性的父节点上
+
+IE 7: `ele.currentStyle.hasLayout` 当前元素是否触发 layout (父元素css 样式 zoom:1，会返回 true，否则返回 false)
 
 ### table node
 
