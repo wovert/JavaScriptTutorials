@@ -157,6 +157,30 @@ IE7下，如果当前元素的某个父级触发了 layout, 那么 offsetParent 
 
 IE 7: `ele.currentStyle.hasLayout` 当前元素是否触发 layout (父元素css 样式 zoom:1，会返回 true，否则返回 false)
 
+### offset
+
+`ele.offsetLet` 只读属性，当前元素到定位父级的距离（偏移值），到当前元素的 `offsetParent` 的距离
+
+- 如果没有定位父级
+  - offsetParent -> body / IE7
+  - offsetParent -> html
+
+- 如果有定位父级
+  - IE7 以下：如果自己没有定位，那么offset{Left|Top}是到 body 的距离
+  - 其他：到定位父级的距离
+
+- 如果自己有定位，那么就是到定位父级的距离
+
+IE7 以下，如果自己没有定位，则 offsetLeft, offsetTop 的 body 的距离，如果当前元素有定位，则到当前元素的 `offsetParent` 的距离
+
+`ele.offsetTop`
+
+### 元素宽高
+
+- ele.style.width: 样式宽度(width+px)
+- ele.clientWidth: 可视区域 // 样式宽度+padding
+- ele.offsetWidth: 占位宽度 // 样式宽度+padding+border
+
 ### table node
 
 `tObj.tBodies[0].rows.length` 行数
