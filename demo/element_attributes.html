@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Element Attribute</title>
+</head>
+<body>
+  <section id="ea">
+    <ul id="nav">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Product</a></li>
+      <li><a href="#">Service</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </section>
+  <script>
+    window.onload = function(){
+      var ELEMENT_TYPE = 1;
+      var obj = document.getElementById("ea");
+      
+      console.log('childNodes:', obj.childNodes);
+
+      for(var i=0; i<obj.childNodes.length; i++) {
+        console.log(obj.childNodes[i].nodeType);
+        if (obj.childNodes[i].nodeType == ELEMENT_TYPE) {
+          obj.childNodes[i].style.background = 'red';
+        }
+
+      }
+
+      for(var i=0; i<obj.children.length; i++) {
+        
+        console.log('children:' , obj.children[i].nodeType);
+
+        obj.children[i].style.background = 'pink';
+      }
+    }
+
+  </script>
+</body>
+</html>

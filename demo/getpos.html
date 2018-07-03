@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      padding:0;
+      margin:0;
+    }
+    div {
+      padding: 20px 40px;
+    }
+    #div1 {
+      background: red;
+      position: relative;
+    }
+    #div2 {
+      background: green;
+      position: relative;
+    }
+    #div3 {
+      background: blue;
+      position: relative;
+    }
+  </style>
+</head>
+<body id="body">
+  <header>
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>Product</li>
+        <li>Company</li>
+        <li>Contact</li>
+      </ul>
+    </nav>
+  </header>
+  <section>
+    <div id="div1">
+      <div id="div2">
+        <div id="div3">
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer></footer>
+  <script>
+    function $(id) {
+      return document.getElementById(id);
+    }
+    /**
+     * 
+     * @param o element object
+     * @return p object element position object  
+     */
+    function getPos(o) {
+      if(o.nodeType != 1) return false;
+      var p = {left:0, top:0};
+      while(o) {
+        p.left += o.offsetLeft;
+        p.top += o.offsetTop;
+        if (debug != undefined && console.log) {
+          console.log(o.tagName +' offset(left:'+o.offsetLeft+', top:'+o.offsetTop+')');
+        }
+        o = o.offsetParent;
+      }
+      return p;
+    }
+    var debug = true;
+    window.onload = function() {
+      var d3 = $('div3');
+      var v = getPos(d3);
+
+
+      
+
+    }
+  </script>
+</body>
+</html>

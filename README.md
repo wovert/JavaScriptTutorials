@@ -66,7 +66,7 @@ DOM is tree type structure
 
 `documente.write|writeln()` 向文档写 html 表达式或 javascript 代码
 
-`document.createTextNode()` 创建节点 
+`document.createTextNode()` 创建节点
 
 `document.createElement()` 创建元素节点
 
@@ -80,7 +80,23 @@ DOM is tree type structure
 
 `element.innerHTML` 设置或返回元素的内容
 
-`element.insertBefore()` 在指定已有的节点之前插入新节点
+`element.insertBefore(new_ele, 指定的元素)` 在指定已有的节点之前插入新节点
+
+在 ie 下如果第二个参数的节点不存在，会报错
+
+在其他标准浏览器下第二个参数不存在，则会以appendChild 的形式进行插入添加
+
+```
+if (ele.children[0]) {
+  ele.insertBefore(new_child, ele.children[0]);
+} else {
+  ele.appendChild(new_child);
+}
+```
+
+`parent_ele.replaceChild(new_node, replace_node);`
+
+`parent_ele.removeChild(delete_node)`
 
 #### Element attribute
 
