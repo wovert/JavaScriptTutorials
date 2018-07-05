@@ -1,5 +1,47 @@
 # JavaScript
 
+## Data Type
+
+`String typeof VARIABLE` 判断数据类型 {undefined|number|string|boolen|object(包括 null, array, object, function, dom)}
+
+### Sting
+
+- 属性
+  - Integer `str.length`: 返回字符串长度
+- 方法
+  - Char `str.charAt(3)`: 返回索引所在位置的字符
+
+### 数据类型转换
+
+Number(a) 返回数值或 NaN
+
+parseInt(a)
+
+parseFloat(a)
+
+isNaN(a) : is not a number
+
+## scope
+
+
+
+## style
+
+``` float
+ele.style.float = 'left';
+ele.style.cssFloat = 'left'; // 非IE
+ele.style.styleFloat = 'left'; // IE
+```
+
+``` js . 替换成 []
+ele.style.styleAttr = value;
+ele.style[styleAttr] = value;
+```
+
+``` js css 内联样式
+eel.style.cssText = 'width:200px;height:200px';
+```
+
 ## event
 
 - onmouseover() 鼠标移入事件。mouse 从外部移入到当前元素时触发
