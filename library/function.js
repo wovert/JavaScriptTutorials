@@ -32,3 +32,11 @@ function getElementsByClassName(className) {
   }
   return arr;
 }
+
+function getStyle(obj, property) {
+  if(obj.currentStyle) {
+    return obj.currentStyle[property];
+  } 
+  return getComputedStyle(obj)[property];
+  //return getComputedStyle(obj, null).getPropertyValue(property);
+}

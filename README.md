@@ -23,7 +23,14 @@ isNaN(a) : is not a number
 
 ## scope
 
+作用域
 
+域：空间、范围、区域
+
+### JS 解释器
+
+1. 查找 var 和 function 参数，遇到重名的只留下最后一个 - JS的预解析
+2. 逐行解读代码 - 表达式
 
 ## style
 
@@ -39,8 +46,12 @@ ele.style[styleAttr] = value;
 ```
 
 ``` js css 内联样式
-eel.style.cssText = 'width:200px;height:200px';
+ele.style.cssText = 'width:200px;height:200px';
 ```
+
+`getComputedStyle($('box').width` 后去到浏览器计算后的样式(IE8/7/6 低版本有问题)
+
+`$('box').currentStyle.width` 支持 IE8/7/6，标准浏览器不兼容
 
 ## event
 
