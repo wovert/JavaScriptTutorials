@@ -256,17 +256,109 @@ IE7 以下，如果自己没有定位，则 offsetLeft, offsetTop 的 body 的�
 
 `tObj.tBodies[0].rows[i].style.backgroundColor = '#000'` 单元格
 
-## String对象
+## String
 
-"-a-b-c-d-e-f-".substr(2, 4); // -b-c 从起始索引号提取字符串中指定书目的字符
 
-"-a-b-c-d-e-f-".substring(2, 4); //-b 提取字符串中两个指定索引号之间的字符
+### String Attribute
 
-## 全局函数
+- str.length
+
+### String Method
+
+- `str.charAt([-]?[0-9]+)` : 索引位置的字符，索引0开始; -从右到左(-1开始)
+- `str.charCodeAt(0)` : 返回索引位置字符编码(妙=>22937)，没有字符则默认使用索引0的字符；{0-9=>48-57, A-Z=>65-90, a-z=>97-122}
+- `str.indexOf(字符或字符串, [stratIndex])` : 返回字符所在索引位置，找不到字符则返回-1
+- `str.lastIndexOf('字符或字符串', [startIndex])` : 从右到左搜索，第二个值为负数，默认当成0处理
+- `"-a-b-c-d-e-f-".substr(2, 4)` : -b-c 从起始索引号提取字符串中指定数目的字符
+- `"-a-b-c-d-e-f-".substring(2, 4)` : -b 提取字符串中两个指定索引号之间的字符, 第一个参数为负数时，当0处理
+- `arr.slice(-2, 4)` 返回一个新的数组，包含从 start 到 end （不包括该元素）的 arrayObject 中的元素
+- `str.toUpperCase()` 转换成大写
+- `str.toLowerCase()` 转换成小写
+- `str.split('分隔符')` 返回字符串指定分割的数组
+- `arr.join([分隔符])` 返回按照分隔符数组合并成字符串
+
+``` js
+str.split(separator).join('<span>' + separator + '</span>');
+
+```
+
+### String Static Method
+
+- `String.fromCharCode(22937, 21619)` : 返回字符编码所对应的字符(22937=>妙, 21619=>味)
+
+``` js
+/************ 加密 **********/
+var str = "加密文本";
+var cnt = str.length;
+var str_encrypt = '';
+for(var i=0; i<cnt; i++) {
+  str_encrypt += String.fromCharCode(str.charCodeAt(i)-520);
+}
+console.log(str_encrypt);
+```
+
+## Global Function
 
 encodeURI(str) // 中文
 
 encodeURIComponent(str); // [:/] 也会编码
 
+## time
 
+> 系统时间对象
 
+``` js
+var curDate = new Date(); 当前系统的时间对象
+typeof curDate == 'object'; // true
+var iY = curDate.getFullYear();
+var iM = curDate.getMonth() + 1;
+var iD = curDate.getDate();
+var iW = curDate.getDay(); // 0-6:星期日-星期六
+var ih = curDate.getHourse();
+var im = curdate.getMinutes();
+var is = curDate.getSeconds();
+
+/************* 倒计时 *************/
+// 数字形式：new Date(YYYY,MM,DD,hh,mm,ss);
+// 字符串形式：new Date('June 10, 2013 12:12:12')
+var nowDate = new Date(); // 现在时间点（在变）
+var newDate = new Date('2018,10,20, 18,18,18'); // 未来时间点（不变）
+
+var distance = Math.floor((newDate-nowDate)/1000); // 时间差毫秒转换为秒
+
+var dD = Math.floor(distance/86400); // 天
+var dH = Math.floor(distance%86400/3600); // 时
+var dM = Math.floor(distance%86400%3600/60); // 分
+var dS = Math.floor(distance%60); // 秒
+
+```
+
+## Array
+
+### Array Attribute
+
+- arr.length
+
+### Array Method
+
+- `arr.push(ele)` 追加到最后
+- `arr.unshift(ele)` 追击到最前（IE 6/7 不支持 返回值）
+- `arr.pop()` 弹出最后元素
+- `arr.shift()` 弹出之前元素
+- `arr.splice(0,3,替换字符串或数组)`
+- `arr.sort()` ASCII 排序
+
+``` JS
+arr.sort(function(a,b){
+  return parseInt(b)-parseInt(a);
+})
+```
+
+## Math
+
+- `Math.random()` // 0~1
+- `Math.random()*5 + 5` // 5~10
+- `Math.round()`
+- Math.ceil()
+- Math.concat()
+- Math.reverse()
