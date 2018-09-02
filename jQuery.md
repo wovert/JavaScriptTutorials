@@ -129,14 +129,52 @@ $.fn.extend({
   }
 })
 
+$.fn.extend({
+  print: function(){
+    console.log($(this).html())
+  }
+})
+$("#p").print();
 ```
 
 2. 给jQuery添加全局扩展
 
 ``` JS
-$.extend({
-  "s9": function(){
-    ...
-  }
+(function($){
+  var num = 13; // 局部变量，作用域限制
+  $.extend({
+    "s9": function(){
+      ...
+    }
+  })
+})(jQuery);
+```
+
+## 拖动面板
+
+``` javascript
+$('#title').mouseover(function(){
+  
+  $(this).css('cursor', 'move');
+
+}).mousedown(function(event){
+  var x = event.screenX;
+  var y = event.screenY;
+  var p_left = $(this).parent().offset().left;
+  var p_top = $(this).parent().offset().top;
+
+  $(this).on('mousemove', function(event){
+    var new_x = event.screenX;
+    var new_y = event.screenY;
+
+    var new_p_x = p_left + (new_x - x);
+    var new_p_y = p_top + (new_y - y);
+
+    $(this).parent().css('left', new_p_x + 'px');
+    $(this).parent().css('top', new_p_y + 'px');
+
+  }).mouseup(function(){
+    $(this).off('mousemove')
+  })
 })
 ```
