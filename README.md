@@ -139,7 +139,7 @@ DOM is tree type structure
 
 在其他标准浏览器下第二个参数不存在，则会以appendChild 的形式进行插入添加
 
-```
+``` js
 if (ele.children[0]) {
   ele.insertBefore(new_child, ele.children[0]);
 } else {
@@ -257,7 +257,6 @@ IE7 以下，如果自己没有定位，则 offsetLeft, offsetTop 的 body 的�
 `tObj.tBodies[0].rows[i].style.backgroundColor = '#000'` 单元格
 
 ## String
-
 
 ### String Attribute
 
