@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AddClass</title>
+</head>
+<body>
+  <div class="box"></div>
+  <script>
+    function addClass(o, className) {
+      if (o.clasName == '') {
+        o.className = className;
+      } else {
+        var arrClassName = o.className.split(' ');
+        var _i = arrIndexOf(arrClassName, className);
+        if(_i == -1) {
+          o.className += ' ' + className;
+        }
+      }
+    }
+
+    function removeClass(o, className) {
+      if(o.className != '') {
+        var arrClassName = o.className.split(' ');
+        var _i = arrIndexOf(arrClassName, className);
+        if (_i != -1) {
+          arrClassName.splice(_i, 1);
+          o.className = arrClassName.join(' ')
+        }
+      }
+    }
+
+    function arrIndexOf(arr, v) {
+      for (var i=0; i<arr.length; i++) {
+        if (arr[i] == v) {
+          return i;
+        }
+      }
+      return -1;
+    }
+  </script>
+</body>
+</html>

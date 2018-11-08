@@ -361,3 +361,17 @@ arr.sort(function(a,b){
 - Math.ceil()
 - Math.concat()
 - Math.reverse()
+
+## 异常捕获
+
+- 异常： JS引擎执行JavaScript代码的时候，发生了错误，导致程序停止运行
+- 异常抛出：当异常产生，并且将这个异常生成一个错误信息
+
+- 异常捕获
+  - try{发生异常的代码块} catch(err) {错误信息处理;}
+- throw语句：通过throw 语句创建一个自定义错误
+
+## 元素对象属性
+
+- ele.className
+- 

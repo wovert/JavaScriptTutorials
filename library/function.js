@@ -1,3 +1,40 @@
+String.prototype.trim = function(){
+  return this.replace(/^\s+|\s+$/g, '');
+}
+
+Array.prototype.has = function(v){
+  var i = 0;
+  var cnt = this.length;
+  for(i=0; i<cnt; i++) {
+    if(this[i] === v) {
+      return true;
+    }
+  }
+  return false;
+}
+Array.prototype.append = function(aAny) {
+  var cnt = aAny.length;
+  for(var i=0; len=cnt; i<len; i++) {
+    this.push(aAny[i]);
+  }
+  return this;
+}
+Date.prototype.pattern = function(fmt) {
+  var o = {
+    "M+" : this.getMonth() + 1, // 月份
+    "d+" : this.getDate(), // 日
+    "h+" : this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, // 小时
+    "H+" : this.getHours(), // 小时
+    "m+" : this.getMinutes(), // 分
+    "s+" : this.getSeconds(), // 秒
+    "q+" : Math.floor((this.getMonth() + 3) / 3), // 季度
+    "S" : this.getMilliseconds() // 毫秒  
+  };
+  var week = {
+    "0" : "\u65e5",
+  };
+}
+
 /**
  * 
  * @param o element object
@@ -41,28 +78,6 @@ function getStyle(obj, property) {
   //return getComputedStyle(obj, null).getPropertyValue(property);
 }
 
-String.prototype.trim = function(){
-  return this.replace(/^\s+|\s+$/g, '');
-}
-
-Array.prototype.has = function(v){
-  var i = 0;
-  var cnt = this.length;
-  for(i=0; i<cnt; i++) {
-    if(this[i] === v) {
-      return true;
-    }
-  }
-  return false;
-}
-Array.prototype.append = function(aAny) {
-  var cnt = aAny.length;
-  for(var i=0; len=cnt; i<len; i++) {
-    this.push(aAny[i]);
-  }
-  return this;
-}
-
 function setCookie(name, vlaue, iDay) {
   var oDate = new Date();
   oDate.setDate(oDate.getDate() + iDay);
@@ -82,6 +97,38 @@ function getCookie(name) {
   return '';
 }
 
+function addClass(o, className) {
+  if (o.clasName == '') {
+    o.className = className;
+  } else {
+    var arrClassName = o.className.split(' ');
+    var _i = arrIndexOf(arrClassName, className);
+    if(_i == -1) {
+      o.className += ' ' + className;
+    }
+  }
+}
+
+function removeClass(o, className) {
+  if(o.className != '') {
+    var arrClassName = o.className.split(' ');
+    var _i = arrIndexOf(arrClassName, className);
+    if (_i != -1) {
+      arrClassName.splice(_i, 1);
+      o.className = arrClassName.join(' ')
+    }
+  }
+}
+
+function arrIndexOf(arr, v) {
+  for (var i=0; i<arr.length; i++) {
+    if (arr[i] == v) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 function sprintf() {
   var _arg = arguments;
 
@@ -90,18 +137,3 @@ function sprintf() {
   });
 }
 
-Date.prototype.pattern = function(fmt) {
-  var o = {
-    "M+" : this.getMonth() + 1, // 月份
-    "d+" : this.getDate(), // 日
-    "h+" : this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, // 小时
-    "H+" : this.getHours(), // 小时
-    "m+" : this.getMinutes(), // 分
-    "s+" : this.getSeconds(), // 秒
-    "q+" : Math.floor((this.getMonth() + 3) / 3), // 季度
-    "S" : this.getMilliseconds() // 毫秒  
-  };
-  var week = {
-    "0" : "\u65e5",
-  };
-}
