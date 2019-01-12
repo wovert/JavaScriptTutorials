@@ -80,6 +80,75 @@ $('box').currentStyle.width
 - onresize() 窗口或看框架被调整尺寸
 - onselect() 文本被选定
 
+### event对象
+
+> 当一个事件发生的时候，和当前这个对象发生的这个事件有关的详细信息被临时保存到一个指定地方 event对象
+
+- IE/Chrome event是一个内置全局对象
+- W3C: 事件对象是通过事件函数的第一个参数传入
+
+如果一个函数是被事件调用的，那么这个函数定义的第一个参数就是事件对象
+
+- 事件对象必须在一个事件调用的函数里面使用才有内容
+- 事件函数：事件调用的函数，一个函数是不是事件函数，不在定义时候决定，而是取决于这个调用的时
+
+```js
+obj.onclick = function(ev){
+  var ev = ev || event;
+  // e.clientX/Y 事件发生的时候，鼠标到页面可视区的距离
+}
+
+document.onmouseover = function(ev) {
+  var ev = ev || event;
+  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  obj.style.left = ev.clientX + 'px';
+  obj.style.top = ev.clientY + scrollTop + 'px';
+}
+```
+
+### 事件流
+
+- 事件冒泡
+  - 当一个元素接收到事件的时候，会把它接受到的所有传播给他的父级，一直到window
+  - 阻止冒泡：`ev.cancleBubble = true` 阻止当前对象的当前事件的冒泡
+
+- 事件捕获：
+  - IE下没有，在绑定实践中，W3C下有的
+
+### 事件绑定
+
+- IE：obj.attachEent('on事件名', 事件函数)
+  - 没有捕获
+  - 事件名 on前缀
+  - 事件函数执行的顺序：W3C
+  - 事件执行的顺序是倒序
+- W3C: obj.addEventListener('事件名', 事件函数, 是否捕获); // 是否捕获：默认 false：冒泡，true：捕获
+  - 有捕获
+  - 事件名没有前缀
+  - 事件执行的顺序是正序
+  - this触发该事件的对象
+
+``` js
+function bind(obj, eventName, fn) {
+  if (obj.addEventListener()) {
+    obj.addEventListener(eventName, fn, false)
+  } else {
+    obj.attachEvent('on'+eventName, function() {
+      fn.call(obj);
+    })
+  }
+}
+function unbind(obj, eventName, fn) {
+  if (obj.remvoeEventListener()) {
+    obj.removeEventListener(eventName, fn, false)
+  } else {
+    obj.detachEvent('on'+eventName, function() {
+      fn.call(obj);
+    })
+  }
+}
+```
+
 ## DOM
 
 > DOM is Document Ojbect Model(文档对象模型)
