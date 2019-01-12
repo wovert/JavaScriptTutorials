@@ -13,19 +13,17 @@
 
 ### 数据类型转换
 
+``` js
 Number(a) 返回数值或 NaN
-
 parseInt(a)
-
 parseFloat(a)
-
 isNaN(a) : is not a number
+```
 
 ## scope
 
-作用域
-
-域：空间、范围、区域
+- 作用域
+- 域：空间、范围、区域
 
 ### JS 解释器
 
@@ -34,24 +32,30 @@ isNaN(a) : is not a number
 
 ## style
 
-``` float
+``` js
 ele.style.float = 'left';
 ele.style.cssFloat = 'left'; // 非IE
 ele.style.styleFloat = 'left'; // IE
 ```
 
-``` js . 替换成 []
+``` js
+. 替换成 []
 ele.style.styleAttr = value;
 ele.style[styleAttr] = value;
 ```
 
-``` js css 内联样式
+``` js
+css 内联样式
 ele.style.cssText = 'width:200px;height:200px';
 ```
 
-`getComputedStyle($('box').width` 后去到浏览器计算后的样式(IE8/7/6 低版本有问题)
+``` js
+后去到浏览器计算后的样式(IE8/7/6 低版本有问题)
+getComputedStyle($('box').width 
 
-`$('box').currentStyle.width` 支持 IE8/7/6，标准浏览器不兼容
+支持 IE8/7/6，标准浏览器不兼容
+$('box').currentStyle.width
+```
 
 ## event
 
@@ -111,29 +115,20 @@ DOM is tree type structure
 
 #### document method
 
-`document.getElementById('id')` get 获取某个元素
-
-`document.getElementByName('name')` 返回名称对象集合
-
-`document.getElementsByTagName('tag')` 返回带有指定标签对象集合
-
-`documente.write|writeln()` 向文档写 html 表达式或 javascript 代码
-
-`document.createTextNode()` 创建节点
-
-`document.createElement()` 创建元素节点
+- `document.getElementById('id')` get 获取某个元素
+- `document.getElementByName('name')` 返回名称对象集合
+- `document.getElementsByTagName('tag')` 返回带有指定标签对象集合
+- `documente.write|writeln()` 向文档写 html 表达式或 javascript 代码
+- `document.createTextNode()` 创建节点
+- `document.createElement()` 创建元素节点
 
 ### Element method
 
-`element.appendChild()` 向元素添加新的节点，作为最有一个子节点
-
-`element.getAttribute('attribute')` 返回只读的元素的属性值
-
-`element.setAttribute('attribute', 'value')` 设置元素的属性值
-
-`element.innerHTML` 设置或返回元素的内容
-
-`element.insertBefore(new_ele, 指定的元素)` 在指定已有的节点之前插入新节点
+- `element.appendChild()` 向元素添加新的节点，作为最有一个子节点
+- `element.getAttribute('attribute')` 返回只读的元素的属性值
+- `element.setAttribute('attribute', 'value')` 设置元素的属性值
+- `element.innerHTML` 设置或返回元素的内容
+- `element.insertBefore(new_ele, 指定的元素)` 在指定已有的节点之前插入新节点
 
 在 ie 下如果第二个参数的节点不存在，会报错
 
@@ -147,9 +142,8 @@ if (ele.children[0]) {
 }
 ```
 
-`parent_ele.replaceChild(new_node, replace_node);`
-
-`parent_ele.removeChild(delete_node)`
+- `parent_ele.replaceChild(new_node, replace_node);`
+- `parent_ele.removeChild(delete_node)`
 
 #### Element attribute
 
@@ -202,23 +196,17 @@ if (ele.children[0]) {
 }
 ```
 
-`element.lastChild` 返回只读元素的最后一个子节点
-
-`element.lastElementChild` 返回只读元素的最后一个子元素
-
-`element.nextSibling` 返回只读元素的下一个兄弟节点
-
-`element.nextElementSibling` 返回只读元素的下一个兄弟元素
-
-`element.previousSibling` 返回只读元素的上一个兄弟节点
-
-`element.previousElementSibling` 返回只读元素的上一个兄弟元素
+- `element.lastChild` 返回只读元素的最后一个子节点
+- `element.lastElementChild` 返回只读元素的最后一个子元素
+- `element.nextSibling` 返回只读元素的下一个兄弟节点
+- `element.nextElementSibling` 返回只读元素的下一个兄弟元素
+- `element.previousSibling` 返回只读元素的上一个兄弟节点
+- `element.previousElementSibling` 返回只读元素的上一个兄弟元素
 
 上一个或下一个节点有可能是文本节点如何处理？
 
-`ele.parentNode` 当前元素的只读父节点
-
-`ele.offsetParent` 当前元素的只读离当前元素最近的一个有定位的父节点，没有定位，则默认body
+- `ele.parentNode` 当前元素的只读父节点
+- `ele.offsetParent` 当前元素的只读离当前元素最近的一个有定位的父节点，没有定位，则默认body
 
 IE7 下如果当前元素没有定位默认是body, 如果有定位，则是html
 
@@ -252,9 +240,11 @@ IE7 以下，如果自己没有定位，则 offsetLeft, offsetTop 的 body 的�
 
 ### table node
 
-`tObj.tBodies[0].rows.length` 行数
-
-`tObj.tBodies[0].rows[i].style.backgroundColor = '#000'` 单元格
+``` js
+tObj.tHead[0].rows.length 行数
+tObj.tBodies[0].rows[0].cells.length 列数
+tObj.tFoot[0].rows[i].style.backgroundColor = '#000' 单元格
+```
 
 ## String
 
@@ -278,7 +268,6 @@ IE7 以下，如果自己没有定位，则 offsetLeft, offsetTop 的 body 的�
 
 ``` js
 str.split(separator).join('<span>' + separator + '</span>');
-
 ```
 
 ### String Static Method
@@ -374,4 +363,64 @@ arr.sort(function(a,b){
 ## 元素对象属性
 
 - ele.className
-- 
+
+## 窗口尺寸与大小
+
+- 可视区尺寸: 窗口内内容显示的最大区域
+  - document.documentElement.clientWidth
+  - document.documentElement.clientHeight
+- 滚动高度：内容向上或向左
+  - document.body.scrollTop/scrollLeft
+  - document.documentElement.scrollTop/scrollLeft
+  - document.documentElement.scrollTop/scrollLeft || document.body.scrollTop/scrollLeft\
+
+``` js
+当前页面的滚动条纵坐标位置
+document.documentElement.scrollTop;
+而不是：document.body.scrollTop;
+documentElement 对应的是 html 标签，而 body 对应的是 body 标签。
+
+在标准w3c下，document.body.scrollTop恒为0，需要用document.documentElement.scrollTop来代替;
+如果你想定位鼠标相对于页面的绝对位置时，你会发现google里面1000篇文章里面有999.99篇会让你使用event.clientX+document.body.scrollLeft，event.clientY+document.body.scrollTop，如果你发现你的鼠标定位偏离了你的想象，请不要奇怪，这是再正常不过的事情。
+ie5.5之后已经不支持document.body.scrollX对象了
+所以在编程的时候，请加上这样的判断
+if (document.body && document.body.scrollTop && document.body.scrollLeft)
+{
+    top=document.body.scrollTop;
+    left=document.body.scrollleft;
+}
+if (document.documentElement && document.documentElement.scrollTop && document.documentElement.scrollLeft)
+{
+    top=document.documentElement.scrollTop;
+    left=document.documentElement.scrollLeft;
+}
+```
+
+- 内容高度
+  - document.body.scrollHeight
+  - elementObj.scrollHeight (eleObj元素对象内容的高度， padding+height+padding)
+- 文档高度
+  - document.documentElement.offsetHeight
+  - document.body.offsetHeight
+
+  - 文档高度=margin+border+padding+height+padding+border+margin
+
+![大小](./images/size.gif)
+
+- clientHeight：元素客户区的大小，指的是元素内容及其边框所占据的空间大小（经过实践取出来的大多是视口大小）
+- scrollHeight: 滚动大小，指的是包含滚动内容的元素大小（元素内容的总高度）
+- offsetHeight: 偏移量，包含元素在屏幕上所用的所有可见空间（包括所有的内边距滚动条和边框大小，不包括外边距
+
+document.body和document.documentElement，同样的属性用document.body和document.documentElemen表达出来可能会截然不同。
+
+- body是DOM对象里的body子节点，即 <body> 标签；
+- documentElement 是整个节点树的根节点root，即<html> 标签；
+- DOM把层次中的每一个对象都称之为节点，就是一个层次结构，你可以理解为一个树形结构，就像我们的目录一样，一个根目录，根目录下有子目录，子目录下还有子目录。
+- 以HTML超文本标记语言为例：整个文档的一个根就是,在DOM中可以使用document.documentElement来访问它，它就是整个节点树的根节点。而body是子节点，要访问到body标签，在脚本中可以写：document.body。
+- 除了documentElement，body在浏览器下表现方式的不同和各个浏览器对这三个属性的解释不同，ie下的混杂模式和标准模式也来插了一脚。
+
+### jquery
+
+在jQuery中，`width()`方法用于获得元素宽度；`innerWidth()`方法用于获得`包括内边界（padding）的元素宽度，outerWidth()方法用于获得包括内边界(padding)和边框(border)的元素宽度`，如果`outerWidth()`方法的参数为true则`外边界`(margin)也会被包括进来，即获得包括外边框(margin)、内边界(padding)和边框(border)的元素宽度。同理，innerHeight方法与outerHeight方法也是用同样的方法计算相应的高度。
+
+所以说：对于同一个元素应该是：`width()<=innerWidth()<=outerWidth()<=outerWidth(true);`
