@@ -197,7 +197,11 @@ DOM is tree type structure
 - `element.getAttribute('attribute')` 返回只读的元素的属性值
 - `element.setAttribute('attribute', 'value')` 设置元素的属性值
 - `element.innerHTML` 设置或返回元素的内容
+- `element.offsetHeight()` 网页尺寸(不包含滚动条)
+  - `document.body.offsetWidth || document.documentElement.offsetWidth`
+- `element.scrollHeight()` 网页尺寸(包含滚动条)
 - `element.insertBefore(new_ele, 指定的元素)` 在指定已有的节点之前插入新节点
+
 
 在 ie 下如果第二个参数的节点不存在，会报错
 
@@ -314,6 +318,64 @@ tObj.tHead[0].rows.length 行数
 tObj.tBodies[0].rows[0].cells.length 列数
 tObj.tFoot[0].rows[i].style.backgroundColor = '#000' 单元格
 ```
+
+## window 对象
+
+### window Attribute
+
+- window.innerHeight 浏览器矿口的内部高度
+- window.innerWidth 浏览器矿口的内部宽度
+
+### window method
+
+- window.open() 打开新窗口
+- window.close() 关闭当前窗口
+- window.setInterval(fn, time)
+- widnow.clearInterval(ref)
+- window.setTimeout(fn, time)
+- window.clearTimout(ref)
+
+## history 对象
+
+> winodow.history 对象包含浏览器的历史(url)集合
+
+### history method
+
+- history.back()
+- history.forward()
+- history.go(+-{n})
+
+## location 对象
+
+> 获得当前页面的地址（URL）,并把浏览器重定向到新的页面
+
+### location attribute
+
+- location.hostname 主机域名
+- location.pathname 页面的路径和文件名
+- location.port 端口
+- location.protocol 协议
+- location.href 当前页面URL
+
+### location method
+
+- location.assign() 加载新的文档
+- location.reload() 重新载入
+- location.replace() 替换页面(不记录history)
+
+## screen 对象
+
+> 包含有关用户屏幕的信息
+
+### screen attribute
+
+- screen.availWidth 可用的屏幕宽度
+- screen.availHeight 可用的屏幕高度
+- screen.height 屏幕高度
+- screen.width 屏幕宽度
+
+### screen method
+
 
 ## String
 
