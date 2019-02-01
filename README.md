@@ -153,6 +153,111 @@ b // Symbol(唯一)
 
 判断数据类型 {undefined|number|string|boolen|object(包括 null, array, object, function, dom)} `String typeof VARIABLE`
 
+### Number
+
+#### NaN: not a number  但是它是数字类型的
+
+isNaN(v) 检测当前值是否不是有效数字，返回true代表不是有效数字，返回false时有效数字
+
+```js
+语法：boolean isNaN([value]);
+var num = 12;
+isNaN(num); // false
+isNaN('13'); // false
+isNaN('wovert'); // true
+isNaN(true); // false
+isNaN(false); // false
+isNaN(null); // false
+isNaN(undefined); // true
+isNaN({xx:9}); // true
+isNaN([12,33]); // true
+isNaN([12]); // false
+isNaN(/^$/); // true
+isNaN(function(){}); // true
+
+重要：isNaN检测的机制
+
+1. 首先验证当前要检测的值是否为数字类型的，如果不是，浏览器会默认的把值转换为数字类型
+
+非数字类型的值转换为数字
+
+  其他基本类型转换为数字： 直接使用Number这个方法转换的
+
+    [字符串转数字]
+      Number('88') => 13
+      Number('13px') => NaN 如果当前字符串中出现任意一个非有效数字字符，结果则为 NaN
+      Number('13.5') => 13.5 可以识别小数
+      Number('13.5.0) => NaN
+
+    [布尔转数字]
+      Number(true) => 1
+      Number(false) => 0
+
+    [其他]
+      Number(null) => 0
+      Number(undefined) => NaN
+
+
+  引用数据类型转换为数字： 先把引用值调取toString转为字符串，然后再把字符串调取Number转换为数字
+
+    [对象]
+      ({}).toString() => '[object Object]' => NaN
+
+    [数组]
+      [12,23].toString() => '12,23' => NaN
+      [12].toString() => '12' => 12
+
+    [正则]
+      /^$/.toString() => '/^$/' => NaN
+
+  Number('') => 0
+  [].toString() => '' => false
+
+
+2. 当前检测的值已经是数字类型，是有效数字返回false, 不是返回true (数字类型中只有NaN不是有效数字，其余都是有效数字)
+
+```
+
+#### parseInt/parseFloat
+
+> 等同于Number, 其他类型的值转换为数字类型
+> 和 Number 的区别在于字符串分析上
+> Number: 出现任意非有效数字字符，结果就是NaN
+>
+> parseInt(): 把一个字符串中的前缀整数部分解析出来，parseFloat() 是一个字符串中的前缀浮点数部分解析出来
+
+```js
+parseInt('13.5px') => 13
+parseFloat('13.5px') => 13.5
+
+parseInt('width:30px') => NaN 从字符串最左边开始查找有效数字字符，并且转换为数字，但是一旦遇到一个非有效数字字符，查找结束
+
+
+```
+
+#### NaN的比较
+
+```js
+NaN == NaN => false NaN和谁都不相等，包括自己
+```
+
+思考题：有一个变量num, 存储的值不知道，检测它是否为一个有效数字
+
+```js
+if (Number(num) == NaN) {
+  console.log('num不是有效数字')
+}
+
+NaN和谁都不相等，条件永远不成立（即时num确实不是有效数字，转换的结果确实是NaN， 但是NaN!=NaN的）
+
+
+解决方案：
+if (isNaN(Number(num)) {
+  console.log('num不是有效数字')
+}
+```
+
+
 ### Sting
 
 - 属性
