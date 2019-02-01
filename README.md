@@ -1,8 +1,157 @@
 # JavaScript
 
+## 前段历史
+
+1. 从C/S到B/S (网页制作) (HTML/CSS)
+  + 技术栈：photoshop, HTML, CSS
+2. 从静态到动态，从后端到前段 (js/jQuery/Ajax)
+  + 前段端分离
+    - 后台：完成数据的分析和业务逻辑编写（包含API接口编写）
+    - 前段：网页制作，JS交互效果，数据的交互和绑定 
+  + 技术栈：JavaScript, Ajax, jQuery ...
+3. 从前段到全端(从PC端到移动端) (Hybrid/小程序)
+  + 技术栈：H5, CSS3, 响应式布局开发, zepto, Hybrid(混合APP开发), 微信小程序
+4. 从全端到全栈 (React/Vue/Webpack/Node)
+  + 全栈开发：一种语言前后端都可以开发
+  + 技术栈：Node(基于JS编程语言开发服务端)， **Express/Koa**
+  + 高性能框架：**Vue、React、Angular、webpack**
+
+5. web4.0 **VR/AR**元年，需要 **Canvas/WebGL**
+
+未来软件工程师：端工程师(业务逻辑工程师)/云工程师(数据工程师)
+
+## IDE
+
+> Integrated Development Enviroment 集成开发环境
+
+1. dreamweaver/firefox/photoshop/flash
+2. sublime text
+3. HBuilder
+4. webstorm
+5. atom
+6. vim
+7. Visual Studio Code
+
+## browser kernel
+
+1. **Webkit** kernel(V8 引擎) chrome/safari/opera/大部分国产和手机浏览器
+2. **Gecko** kernel (Mozilla Firefox)
+3. **Presto** kernel
+4. **Trident** 排版引擎 (Internet Explorer)
+5. **KHTML** 排版引擎
+
+- 大部分网站都已放弃IE8以及更低版本浏览器（例如：淘宝）
+- W3C: 万维网联盟，制定编程语言的规范和标准
+- 开发者按照规范编写代码，浏览器开发商也会开发一套按照规范吧代码渲染成页面的东西（内核或者引擎）
+
+- 浏览器内核作用：按照规范，把代码基于GPU（显卡）绘制出对应的图像和页面
+
+### 为什么出现浏览器兼容？
+ 
+1. 部分浏览器提前开发一些**更好体验的功能**，后期这些功能会**被收录到W3C规范**中，但是在**收录之前**，会存在一定的**兼容性**。
+- `-webkit-border-radius`
+- `-moz-border-radius`
+- `-ms-border-radius`
+- `-o-border-radius`
+- `border-radius`
+
+2. 各个浏览器厂商，突出自己产品独特性，用其他方法实现了W3C规范中的功能
+- `getComputedStyle`
+- `currentStyle`
+
+[马克飞象](https://maxiang.io/)
+
+## JavaScript Structure
+
+- ECMAScript(语法规范) 描述语言的语法和对象
+- DOM(文档对象模型) 描述网页内容的方法和接口
+- BOM(浏览器对象模型) 描述与浏览器进行交互的方法和接口
+
+- 标记语言：html/css, xml
+- 脚本语言：javascript/python/php
+- 编程语言：java/go
+
+- 推荐阅读书籍：
+  - 《JavaScript权威指南》
+  - 《JavaScript高级程序设计》
+  - 《你所不知道的JavaScript》
+  - 《ES6标准入门》
+
+## Variable
+
+> 存储值的容器或者代名词，因为它存储的值可以改变，所以称为变量
+
+### ES 语言规范 —— 创建变量
+
+- `var` (ES3)
+- `function` (ES3) 创建函数（函数名是变量，只不过存储的值是函数类型）
+- `let` (ES6) 创建声明局部变量
+- `const` (ES6) 创建常量
+- `import` (ES6) 模块规范导出信息
+- `class` (ES6) 创建类
+
+``` js
+语法：
+var [变量名] = 值;
+let [变量名] = 值;
+const [常量名] = 值;
+function 函数名 () {
+  函数体...
+}
+
+const PI = 3.14
+PI = 3.1415
+Uncaught TypeError: Assignment to constant variable. 未捕获的错误类型: 赋值给常量
+```
+
+### 变量命名规范
+
+- 严格区分大小写
+- 遵循驼峰命名法
+- 数字、字母、下划线和美元符号($)命名
+- 数字不能作为开头
+- 命名语义化 
+- 不能使用关键字和保留字
+
+- 常用规范
+  - `_num` 内部或私有变量
+  - `$obj` DOM对象变量
+  - add / create / insert
+  - del (delete) / update / remove (rm)
+  - info / detail
+  - log
+
 ## Data Type
 
-`String typeof VARIABLE` 判断数据类型 {undefined|number|string|boolen|object(包括 null, array, object, function, dom)}
+### Date Type Category
+
+- 基本数据类型
+  - 数字 `Number`
+  - 布尔 `Bool`
+  - 字符串 `String`
+  - 空引用 `null`
+  - 未命名 `undefined`
+- 引用数据类型
+  - object
+    - 普通对象
+    - 数组对象
+    - 正则对象
+    - 日期对象
+   - 函数 function
+- `Symbol`(ES6) 唯一的值
+
+`NaN` (Not a number) 不是一个有效的数字，但是属于number类型
+
+
+```js
+var a = Symbol('唯一');
+var b = Symbol('唯一');
+a == b // false
+a // Symbol(唯一)
+b // Symbol(唯一)
+```
+
+判断数据类型 {undefined|number|string|boolen|object(包括 null, array, object, function, dom)} `String typeof VARIABLE`
 
 ### Sting
 
@@ -19,6 +168,17 @@ parseInt(a)
 parseFloat(a)
 isNaN(a) : is not a number
 ```
+
+### JS 如何被运行
+
+- 在浏览器内核渲染解析
+- 基于Node环境运行（V8 引擎渲染和解析JS）
+
+### 调试技巧
+
+- `console.log()` 输出日志
+- `console.dir()` 比log输出的更加详细一些
+- `console.table()` json数据按照表格的方式输出
 
 ## scope
 
