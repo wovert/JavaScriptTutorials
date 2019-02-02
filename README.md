@@ -295,6 +295,107 @@ isNaN(a) : is not a number
 1. 查找 var 和 function 参数，遇到重名的只留下最后一个 - JS的预解析
 2. 逐行解读代码 - 表达式
 
+### boolean
+
+> boolean={true,false}
+
+其他数据类型转换为boolean
+
+- `Boolean()`
+- `!`
+- `!!`
+
+```js
+!0 => true
+!'' => true
+Boolean(1) => true
+!'沃尔特' => false 先把其他数据类型转换为布尔类型，然后取反
+
+!![] => true
+!!{} => true
+
+!!null => false
+!!undefiend => false
+!!'' => false
+!!0 => false
+!!NaN => false
+```
+
+总结：在JS中只有`0、NaN、空字符串、null、undefined`这个五个值转换为布尔类型的`false`, 其余都转换为`true`
+
+### null && undefined
+
+> 都代表空或者灭有
+> `null`: 空对象指针
+> `undefined`: 未定义
+
+`null` 一般都是意料之中的没有(先手动设置为null, 后面再次给它其他值)
+
+```js
+var num = null; // => null 手动赋值
+num = 88;
+```
+
+`undefined` 代表没有一般都不是认为手动控制的，大部分都是浏览器自主为空（后面可以赋值也可以不赋值）
+
+```js
+var name; // 此时变量的值浏览器给分配的就是 undefined
+...
+后面可以赋值也可以不赋值
+
+Number(null) => 0
+Number(undefined) => NaN
+```
+
+### Object 对象数据类型
+
+> 普通对象
+> - 由大括号包裹起来的
+> - 由零到多组属性名和属性值（键值对）组成
+
+- 属性：描述当前对象的特征
+- 属性名：当前具备这个特征
+- 属性值：对这个特征的描述
+
+属性名称为键`[key]`，属性值称为值`[value]`，一组属性名和属性值称为一组键值对儿
+
+```js
+var obj = {
+  name: 'wovert',
+  age: 1
+};
+
+对象的操作：CRUD
+
+[READ]
+语法：对象.属性 / 对象[属性]
+
+obj.name
+obj['name'] 或 obj["name"] 一般来说，对象的属性名都是字符串格式的（属性值不固定，任何格式都可以）
+
+
+[CREATE/UPDATE]
+JS对象中属性是不允许重复的，是唯一的
+
+var obj1 = {name: 'one object'};
+var obj2 = {name: 'two object'};
+obj1.age = 10; // 原有对象中不存在age, 此处相当于当前对象新增加一个属性 age
+obj2['age'] = 20
+
+[DELETE]
+彻底删除：对象中不存在这个属性
+delete obj['age'];
+
+假删除：没有移除这个属性，只是让当前属性的值为空
+obj.sex = null;
+```
+
+获取属性值的时候，如果当前对象有这个属性名，则可以正常获取到值(也有可能是 `null` 值)，但是如果没有这个属性名，则获取的结果是 `undefined`
+
+```js
+obj['color']; // undefined
+```
+
 ## style
 
 ``` js
@@ -634,19 +735,16 @@ tObj.tFoot[0].rows[i].style.backgroundColor = '#000' 单元格
 
 ### screen attribute
 
-- screen.availWidth 可用的屏幕宽度
-- screen.availHeight 可用的屏幕高度
-- screen.height 屏幕高度
-- screen.width 屏幕宽度
-
-### screen method
-
+- `screen.availWidth` 可用的屏幕宽度
+- `screen.availHeight` 可用的屏幕高度
+- `screen.height` 屏幕高度
+- `screen.width` 屏幕宽度
 
 ## String
 
 ### String Attribute
 
-- str.length
+`str.length`
 
 ### String Method
 
