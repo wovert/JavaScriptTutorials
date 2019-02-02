@@ -396,6 +396,99 @@ obj.sex = null;
 obj['color']; // undefined
 ```
 
+一个对象中的属性名不仅仅是字符串格式的，还有可能是数字格式的。其他格式的会先转换成字符串，然后存储。
+
+```js
+var obj = {
+  name: 'wovert',
+  0: 12
+}
+obj[0] => 12
+obj['0'] => 12
+ojb.0 => Uncaught SyntaxError: Unexpected number
+
+SyntaxError: 语法错误
+
+obj[true] = 1 => obj['true']
+obj[null] = 2 => obj['null']
+obj[undefined] = 3 => obj['undefined']
+obj[[]] = 4 => obj[[].toString()] => obj['']
+obj[{}] = 5 => obj[{}.toString()] => obj['[object Object]']
+obj[function(){}] = 'function property' => obj[(function(){}).toString()] => obj['function(){}']
+```
+
+当存储的属性名不是**字符串**也不是**数字**的时候，浏览器会把这个值转换为字符串(`to String()`)，然后再进行存储
+
+### 数组对象（对象由键值对组成的）
+
+```js
+var oo = {
+  a: 12
+}
+var arr = [1, 2]; // 12和23都是属性值，属性名呢？
+
+arr[0] => 1
+arr['1'] => 2
+arr.0 => Uncaght SyntaxError: Unexpected number
+
+数组对象的属性是数字（属性名称称为当前对象的索引）
+
+arr.length => 2
+arr['length'] => 2
+
+arr['age'] = 100
+arr['age'] => 100
+```
+
+### JS 运行机制
+
+1. 浏览器内核引擎徐然和解析JS的时候，会提供一个供JS代码运行的环境，这个环境称之为“全局作用域 (global/window scope)”
+2. 变量提升
+3. 代码自上而下执行
+  + 基本类型的值存储在当前作用域下
+    - `var a = 12;` 的操作步骤
+      - 1. 首先开辟一个栈内存空间存储`12`
+      - 2. 在当前作用域中声明一个变量 `var a`
+      - 3. 让声明的变量和存储12进行关联（把存储的12赋值给a，赋值操作叫做定义）
+    - 基本数据类型（值类型），是按照值来操作的；把原有的值复制一份放到新的空间或者位置上，和原来的值没有关系
+  + 引用数据类型的值不能直接存储到当前的作用域下，需要先开辟一个新的空间（理解为仓库），把内容存储到这个空间中
+    - `var obj = {n:100};`
+      - 1. 首先开辟一个新的内存空间，把对象中的键值对依次存储起来（此空间有16进制的地址）
+      - 2. 声明一个变量
+      - 3. 让变量和空间地址关联在一起（把空间地址赋值给变量）
+    - 引用类型不是按照值来操作，它操作的是空间的引用地址；把原来空间的地址赋值给新的变量，但是原来的空间没有被克隆，还是一个空间，这样就会出现多个变量关联的是相同的空间，相互之间就会存在影响了
+
+- 基本数据类型按值操作
+- 引用数据类型按空间地址操作
+
+```js
+var obj = {
+  n: 10,
+  m: obj.n * 10
+}; // Uncaught TypeError: Cannot read property 'n' of undefined
+console.log(obj.m);
+
+1. 形成全局作用域；
+2. 代码自上而下执行；
+3. 首先开辟新的堆内存 (0XAAAFFF)，把键值对存储到堆内存中
+  n: 10, m: obj.n * 10 => obj.n? 此时堆内存信息还没有存储完成，空间的地址还没有给obj, 此时的obj是undefined，obj.n <=> undefined.n
+
+var obj = {
+  n: 10,
+  m: this.n * 10
+};
+console.log(obj.m); // NaN
+
+{m:10, n: this.n * 10} 的this默认是指向window对象，而window对象没有 n属性，因此，this.n => undefiend, undefined * 10 => NaN
+
+var n = 9;
+var obj = {
+  n: 10,
+  m: this.n * 10
+};
+console.log(obj.m); // 90
+```
+
 ## style
 
 ``` js
