@@ -15,6 +15,10 @@
 
 Number(a) 返回数值或 NaN
 
+任何涉及NaN的操作（例如NaN/10）都会返回NaN
+
+NaN与任何值都不相等，包括NaN本身
+
 parseInt(a)
 
 parseFloat(a)
@@ -34,7 +38,7 @@ isNaN(a) : is not a number
 
 ## style
 
-``` float
+``` js
 ele.style.float = 'left';
 ele.style.cssFloat = 'left'; // 非IE
 ele.style.styleFloat = 'left'; // IE
@@ -45,7 +49,8 @@ ele.style.styleAttr = value;
 ele.style[styleAttr] = value;
 ```
 
-``` js css 内联样式
+``` js
+// css 内联样式
 ele.style.cssText = 'width:200px;height:200px';
 ```
 
