@@ -77,6 +77,11 @@
   - 《你所不知道的JavaScript》
   - 《ES6标准入门》
 
+## script标签属性
+
+- defer
+- async
+
 ## Variable
 
 > 存储值的容器或者代名词，因为它存储的值可以改变，所以称为变量
@@ -141,7 +146,6 @@ Uncaught TypeError: Assignment to constant variable. 未捕获的错误类型: �
 - `Symbol`(ES6) 唯一的值
 
 `NaN` (Not a number) 不是一个有效的数字，但是属于number类型
-
 
 ```js
 var a = Symbol('唯一');
@@ -231,8 +235,6 @@ parseInt('13.5px') => 13
 parseFloat('13.5px') => 13.5
 
 parseInt('width:30px') => NaN 从字符串最左边开始查找有效数字字符，并且转换为数字，但是一旦遇到一个非有效数字字符，查找结束
-
-
 ```
 
 #### NaN的比较
@@ -256,7 +258,6 @@ if (isNaN(Number(num)) {
   console.log('num不是有效数字')
 }
 ```
-
 
 ### Sting
 
@@ -301,9 +302,11 @@ isNaN(a) : is not a number
 
 其他数据类型转换为boolean
 
-- `Boolean()`
-- `!`
-- `!!`
+```js
+Boolean()
+!
+!!
+```
 
 ```js
 !0 => true
@@ -493,10 +496,65 @@ console.log(obj.m); // 90
 
 ### 函数执行
 
+> 私有作用域：把之前创建函数时存储的字符串代码执行
+
 目的：存储到堆内存中的代码字符串变为真正的JS代码自上而下执行，从而实际应有的功能
 
 1. 函数执行，首先会形成一个私有的作用域（一个供代码执行的环境，也是一个栈内存）
 2. 在堆内存中存储的字符串复制一份过来，变为真正的JS代码，在新的开辟的作用域中自上而下执行
+
+### 变量提升机制
+
+当栈内存（作用域）形成，JS代码自上而下执行之前，浏览器首先会把所有的带`var/funcstion`关键字进行提前的**声明或者自定义**，这种预先处理机制称之为**变量提升**
+
+- 声明(declare): `var a/function sum` (默认值值`undefined`)
+- 定义(defined): `a=12` (定义就是赋值操作)
+
+- 变量提升阶段
+  - 带var的之**声明未定义**
+  - 带function的**声明和赋值**都完成
+- 变量提升只发生在当前作用域（例如：开始加载页面的时候只对全局作用域下的进行提升，因为此时函数中存储的都是字符串而已）
+- 全局作用域下声明函数或者变量时**全局变量**，在私有作用域下声明的变量时**私有变量**(带`var/function`的才是声明)
+- 当代码执行遇到创建函数代码后，浏览器直接跳过此代码（因为在提升阶段就已经完成函数的赋值操作了）
+- 私有作用域形成后，也不是立即代码执行，而是先进行进行变量提升（变量提升前，先形参赋值）
+- 在ES3/ES5语法规范中，只有全局作用域和函数执行的私有作用域（栈内存），其他大括号不会形成栈内存
+
+- 在全局作用域下声明的变量，等价于`window`全局对象设置属性（变量时属性名，变量值是属性值）
+- 私有作用域中声明的私有变量和window对象没啥关系
+- `in`检测某个属性是否隶属于这个对象 `'name' in window`
+- **全局变量和window对象属性**存在**映射机制**
+
+不加`var`的本质是`window`属性
+
+```js
+// 先判断是否存在a变量，然后在检查是否存在windows对象属性a
+console.log(a); // Uncaught ReferenceError: a is not defined
+console.log(window.a); // undefined
+console.log('a' in window); // false
+a = 12; // window.a = 12
+console.log(a); // 12
+console.log(window.a) /// 12
+```
+
+#### 私有作用域中带var和不带的区别
+
+1. 带`var`在私有作用域变量提升阶段，都声明未私有变量，和外界没有任何的关系
+2. 不带`var`不是私有变量，会向它的上级作用域查找，看它是否为上级的变量，不是，继续向上查找，一直找到window对象的属性为止（这种查找机制叫做**作用域链**）。
+
+```js
+console.log(a, b); // undefined, undefined
+var a = 12,
+    b = 12;
+
+function fn () {
+  console.log(a, b); // undefined 12
+  var a = b = 13;
+  console.log(a, b); // 13 13
+}
+
+fn();
+console.log(a, b); // 12 13
+```
 
 ## style
 

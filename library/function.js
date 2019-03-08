@@ -171,3 +171,13 @@ function getDocumentPort () {
     }
   }
 }
+
+function sum () {
+  var total = i = item = 0;
+  var cnt = arguments.length;
+  for(; i < cnt; i++) {
+    item = parseFloat(arguments[i]);
+    !isNaN(item) ? total += item : null;
+  }
+  return total;
+}
