@@ -561,6 +561,80 @@ fn();
 console.log(a, b); // 12 13
 ```
 
+#### 等号左边变量提升
+
+```js
+/*
+ 变量提升
+ var fn = undefined;
+ sum = $AFAFAF
+*/
+fn(); // Uncaught TypeError: fn is not a function
+sum();
+var fn = function() {
+  console.log(1);
+} // 代码执行到此处会把函数值赋值给fn
+function sum() {
+  console.log(2);
+}
+```
+
+#### 条件判断下的变量提升
+
+> 当前作用域下，不管条件是否成立都要进行变量提升
+
+- 带`var`的还是只声明
+- 带`function`的在老版本浏览器渲染机制下，声明+定义都处理，但是为了迎合ES6中的块级作用域，新版本浏览器对于函数（在条件判断中的函数），不管条件是否成立，都只是先声明，没有定义
+
+```js
+console.log(fn); // undefined
+if (1 === 1) {
+  console.log(fn); // 函数本身：当条件成立，进入到判断体重（ES6中它是一个块级作用域）第一件事并不是代码执行，而是类似于变量提升一样，先把fn声明和定义了，也就是判断体重代码执行之前，fn就已经赋值了
+  function fn() {
+    console.log('ok');
+  }
+}
+console.log(fn); // 函数本身
+```
+
+#### 重名问题的处理
+
+```js
+/*
+ 带var和function关键字声明相同的名字，这种也算是重名了（其实是一个fn，只是存储值的类型不一样）
+*/
+var fn = 12; // window.fn = 12
+function fn () { // window.fn = function(){}
+}
+
+/*
+ 重名的处理：如果名字重复了，不会重新的声明，但是会重新的定义（重新赋值）[不管是变量提升还是代码执行阶段皆是如此]
+
+ 变量提升：
+ var fn = $A
+        = $B
+        = $C
+        = $D
+*/
+fn(); // 4
+function fn() {console.log(1)} // $A
+fn(); // 4
+function fn() {console.log(2)} // $B
+fn(); // 4
+var fn = 100; // 已经上面声明了，忽略 var fn
+fn(); // Uncaught TypeError: fn is not function
+function fn() {console.log(3)} // $C
+fn(); // 不会执行
+function fn() {console.log(4)} // $D
+fn(); // 不会执行
+```
+
+#### ES6 中let不存在变量提升
+
+```js
+
+```
+
 ## style
 
 ``` js
