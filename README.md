@@ -130,13 +130,13 @@ Uncaught TypeError: Assignment to constant variable. 未捕获的错误类型: �
 
 ### Date Type Category
 
-- 基本数据类型
+- 【基本数据类型】
   - 数字 `Number`
   - 布尔 `Bool`
   - 字符串 `String`
   - 空引用 `null`
-  - 未命名 `undefined`
-- 引用数据类型
+  - 未定义 `undefined`
+- 【引用数据类型】
   - object
     - 普通对象
     - 数组对象
@@ -270,6 +270,11 @@ if (isNaN(Number(num)) {
 
 ``` js
 Number(a) 返回数值或 NaN
+
+任何涉及NaN的操作（例如NaN/10）都会返回NaN
+
+NaN与任何值都不相等，包括NaN本身
+
 parseInt(a)
 parseFloat(a)
 isNaN(a) : is not a number
@@ -571,6 +576,7 @@ ele.style[styleAttr] = value;
 ```
 
 ``` js
+// css 内联样式
 css 内联样式
 ele.style.cssText = 'width:200px;height:200px';
 ```
@@ -977,6 +983,8 @@ var dS = Math.floor(distance%60); // 秒
 
 ## Array
 
+> 数组也是对象数据类型的，也是由键值对组成的
+
 ### Array Attribute
 
 - arr.length
@@ -989,6 +997,9 @@ var dS = Math.floor(distance%60); // 秒
 - `arr.shift()` 弹出之前元素
 - `arr.splice(0,3,替换字符串或数组)`
 - `arr.sort()` ASCII 排序
+- `arr.resverse()`
+- `arr.indexOf/lastIndexof`
+- `arr.concat()`
 
 ``` JS
 arr.sort(function(a,b){
