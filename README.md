@@ -672,6 +672,77 @@ x();
 console.log(n);
 ```
 
+### 创建的变量不存在变量提升
+
+> ES6中基于`let/const`等方式创建斌量或者函数，不存在变量提升机制
+> 切断了全局变量和window属性的映射机制
+> 在相同的作用域中，基于let不能声明相同名字的变量（不管用什么方式在当前作用域下声明了变量，再次使用let创建都会报错）
+> 最燃没有变量提升机制，但是在当前作用域代码自伤而下执行之前，浏览器会做一个重复性检测（语法检测）；自上而下查找当前作用域下所有变量，一旦发现有重复的，直接抛出异常，代码也不会再执行了（虽然没有把变量提前声明定义，但是浏览器已经记住了，当前作用域下有哪些变量）
+
+```js
+console.log(a); // Uncaught ReferenceError: a is not defined
+let a = 12;
+let fn = () => {}
+
+console.log(window.a); // undefined
+
+let a = 13; // Uncaught SyntaxError: Identifier 'a' has already been declared
+```
+
+### 暂时性死区
+
+- `let/const`是使用区块作用域
+- `var`是使用函数作用域
+
+在`let/const`声明之前就访问对应的变量与常量，会抛出`ReferenceError`错误；但在`var`声明之前就访问对应的变量，则会得到`undefined`
+
+```js
+console.log(aVar) // undefined
+console.log(aLet) // causes ReferenceError: aLet is not defined
+var aVar = 1
+let aLet = 2
+```
+
+> 由`let/const`声明的变量，当它们包含的词法环境(Lexical Environment)被实例化时会被创建，但只有在变量的词法绑定(LexicalBinding)已经被求值运算后，才能够被访问
+
+> 当程序的控制流程在新的作用域(module, function或block作用域)进行实例化时，在此作用域中的用let/const声明的变量会先在作用域中被创建出来，但因此时还未进行词法绑定，也就是对声明语句进行求值运算，所以是不能被访问的，访问就会抛出错误。所以在这运行流程一进入作用域创建变量，到变量开始可被访问之间的一段时间，就称之为TDZ(暂时死区)。
+
+> 以let/const声明的变量，的确也是有提升(hoist)的作用。这个是很容易被误解的地方，实际上以let/const声明的变量也是会有提升(hoist)的作用。提升是JS语言中对于变量声明的基本特性，只是因为`TDZ`的作用，并不会像使用`var`来声明变量，只是会得到`undefined`而已，现在则是会直接抛出`ReferenceError`错误，而且很明显的这是一个在运行期间才会出现的错误。
+
+let声明的变量会在作用域中被提升
+
+```js
+let x = 'outer value'
+(function() {
+  // 这里会产生 TDZ for x
+  console.log(x) // TDZ期间访问，产生ReferenceError错误
+  let x = 'inner value' // 对x的声明语句，这里结束 TDZ for x
+}())
+```
+
+在例子中的IIFE里的函数作用域，变量x在作用域中会先被提升到函数区域中的最上面，但这时会产生TDZ，如果在程序流程还未运行到x的声明语句时，算是在TDZ作用的期间，这时候访问x的值，就会抛出ReferenceError错误。
+
+这几句比较重点的部份是关于初始化的过程。以`let/const`声明的变量或常量，必需是经过对声明的赋值语句的求值后，才算初始化完成，创建时并不算初始化。如果以let声明的变量没有赋给初始值，那么就赋值给它undefined值。也就是经过初始化的完成，才代表着TDZ期间的真正结束，这些在作用域中的被声明的变量才能够正常地被访问。
+
+下面这个例子是一个未初始化完成的结果，它一样是在TDZ中，也是会抛出`ReferenceError`错误:
+
+`let x = x`
+
+因为右值(要被赋的值)，它在此时是一个还未被初始化完成的变量，实际上我们就在这一个同一表达式中要初始化它。
+
+> 注: TDZ最一开始是为了`const`所设计的，但后来的对`let`的设计也是一致的，例子中都用`let`来说明会比较容易。
+> 注: 在ES6标准中，对于`const`所声明的识别子仍然也经常为`variable(变量)`，称为`constant variable(固定的变量)`。以`const`声明所创建出来的常量，在JS中只是**不能再被赋(can't re-assignment)**，并不是**不可被改变(immutable)**的，这两种概念仍然有很大的差异。
+
+
+
+```js
+var a = 12;
+if (true) {
+  console.log(a); // Uncaught ReferenceError: a is not defined
+  let a = 13;
+}
+```
+
 ## style
 
 ``` js
