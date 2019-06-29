@@ -1,24 +1,22 @@
 # JavaScript
 
-## 前段历史
+## Frontend History
 
-1. 从C/S到B/S (网页制作) (HTML/CSS)
-  + 技术栈：photoshop, HTML, CSS
-2. 从静态到动态，从后端到前段 (js/jQuery/Ajax)
-  + 前段端分离
+- 1.从C/S到B/S (网页制作) (HTML/CSS)；技术栈：photoshop, HTML, CSS
+- 2.从静态到动态，从后端到前段 (js/jQuery/Ajax)
+  - 前段端分离
     - 后台：完成数据的分析和业务逻辑编写（包含API接口编写）
     - 前段：网页制作，JS交互效果，数据的交互和绑定 
-  + 技术栈：JavaScript, Ajax, jQuery ...
-3. 从前段到全端(从PC端到移动端) (Hybrid/小程序)
-  + 技术栈：H5, CSS3, 响应式布局开发, zepto, Hybrid(混合APP开发), 微信小程序
-4. 从全端到全栈 (React/Vue/Webpack/Node)
-  + 全栈开发：一种语言前后端都可以开发
-  + 技术栈：Node(基于JS编程语言开发服务端)， **Express/Koa**
-  + 高性能框架：**Vue、React、Angular、webpack**
+  - 技术栈：JavaScript, Ajax, jQuery ...
+- 3.从前段到全端(从PC端到移动端) (Hybrid/小程序)
+  - 技术栈：H5, CSS3, 响应式布局开发, zepto, Hybrid(混合APP开发), 微信小程序
+- 4.从全端到全栈 (React/Vue/Webpack/Node)
+  - 全栈开发：一种语言前后端都可以开发
+  - 技术栈：Node(基于JS编程语言开发服务端)， **Express/Koa**
+  - 高性能框架：**Vue、React、Angular、webpack**
+- 5.web4.0 **VR/AR**元年，需要 **Canvas/WebGL**
 
-5. web4.0 **VR/AR**元年，需要 **Canvas/WebGL**
-
-未来软件工程师：端工程师(业务逻辑工程师)/云工程师(数据工程师)
+未来软件工程师：**端工程师(业务逻辑工程师)/云工程师(数据工程师)**
 
 ## IDE
 
@@ -32,7 +30,14 @@
 6. vim
 7. Visual Studio Code
 
-## browser kernel
+## About JavaScript
+
+### Where(Run JavaScript)
+
+- Browser Kernel
+- Server NodeJS
+
+### browser kernel
 
 1. **Webkit** kernel(V8 引擎) chrome/safari/opera/大部分国产和手机浏览器
 2. **Gecko** kernel (Mozilla Firefox)
@@ -46,9 +51,10 @@
 
 - 浏览器内核作用：按照规范，把代码基于GPU（显卡）绘制出对应的图像和页面
 
-### 为什么出现浏览器兼容？
- 
+### 为什么出现浏览器兼容
+
 1. 部分浏览器提前开发一些**更好体验的功能**，后期这些功能会**被收录到W3C规范**中，但是在**收录之前**，会存在一定的**兼容性**。
+
 - `-webkit-border-radius`
 - `-moz-border-radius`
 - `-ms-border-radius`
@@ -56,6 +62,7 @@
 - `border-radius`
 
 2. 各个浏览器厂商，突出自己产品独特性，用其他方法实现了W3C规范中的功能
+
 - `getComputedStyle`
 - `currentStyle`
 
@@ -63,19 +70,27 @@
 
 ## JavaScript Structure
 
-- ECMAScript(语法规范) 描述语言的语法和对象
-- DOM(文档对象模型) 描述网页内容的方法和接口
-- BOM(浏览器对象模型) 描述与浏览器进行交互的方法和接口
+- **ECMAScript(语法规范)** 描述语言的**语法**和对象
+- **DOM(文档对象模型)** 描述网页**内容的方法和接口**
+- **BOM(浏览器对象模型)** 描述**与浏览器**进行**交互的方法和接口**
 
-- 标记语言：html/css, xml
-- 脚本语言：javascript/python/php
-- 编程语言：java/go
+- 【标记语言】：html/css, xml
+- 【脚本语言】：javascript/python/php
+- 【编程语言】：java/go
 
 - 推荐阅读书籍：
   - 《JavaScript权威指南》
   - 《JavaScript高级程序设计》
   - 《你所不知道的JavaScript》
   - 《ES6标准入门》
+
+### ECMAScript
+
+- es1.0 - es3.1
+- es5
+- es6(es2015)
+- es7(es2016)
+- es8(es2017)
 
 ## script标签属性
 
@@ -96,7 +111,6 @@
 - `class` (ES6) 创建类
 
 ``` js
-语法：
 var [变量名] = 值;
 let [变量名] = 值;
 const [常量名] = 值;
@@ -128,21 +142,21 @@ Uncaught TypeError: Assignment to constant variable. 未捕获的错误类型: �
 
 ## Data Type
 
-### Date Type Category
+### Date Type
 
-- 【基本数据类型】
+- 【基本数据类型】- 值类型
   - 数字 `Number`
   - 布尔 `Bool`
   - 字符串 `String`
   - 空引用 `null`
   - 未定义 `undefined`
-- 【引用数据类型】
+- 【复杂数据类型】- 引用数据类型
   - object
     - 普通对象
     - 数组对象
     - 正则对象
     - 日期对象
-   - 函数 function
+  - 函数 function
 - `Symbol`(ES6) 唯一的值
 
 `NaN` (Not a number) 不是一个有效的数字，但是属于number类型
@@ -333,33 +347,20 @@ Boolean(1) => true
 
 ### null && undefined
 
-> 都代表空或者灭有
-> `null`: 空对象指针
-> `undefined`: 未定义
+> 都代表空或者没有
 
-`null` 一般都是意料之中的没有(先手动设置为null, 后面再次给它其他值)
+- `null`: 空对象指针；一般都是意料之中的没有(先手动设置为null, 后面再次给它其他值)
 
 ```js
 var num = null; // => null 手动赋值
 num = 88;
 ```
 
-`undefined` 代表没有一般都不是认为手动控制的，大部分都是浏览器自主为空（后面可以赋值也可以不赋值）
-
-```js
-var name; // 此时变量的值浏览器给分配的就是 undefined
-...
-后面可以赋值也可以不赋值
-
-Number(null) => 0
-Number(undefined) => NaN
-```
-
 ### Object 对象数据类型
 
 > 普通对象
-> - 由大括号包裹起来的
-> - 由零到多组属性名和属性值（键值对）组成
+> 由大括号包裹起来的
+> 由零到多组属性名和属性值（键值对）组成
 
 - 属性：描述当前对象的特征
 - 属性名：当前具备这个特征
