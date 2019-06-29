@@ -389,3 +389,57 @@ f1();
   - 如果你用es5之前的版本开发代码(IE8、IE7。。。)，可能天天都要写原型
   - 理解了原型，才是理解了JS面向对象的核心
 - 类继承其实本质上还是用原型继承来(包装)的
+
+## 对象的属性查找规则
+
+1. 首先查看本身有没有length属性
+2. 如果本身没有该属性，那么去它的原型对象中查找
+3. 如果原型对象中没有，那么就去原型对象的原型对象中查找，最终一直找到根对象（Object.prototype）
+4. 最终都没有找到的话，我们认为该对象并没有该属性，如果获取该属性的值：undefined
+
+## 补充，判断数据类型
+
+- typeof 
+  - typeof只能判断：数字、字符串、布尔值、undefined、函数
+- `Object.prototype.toString.call()`
+  - 5  '[object Number]'
+  - "abc" '[object String]'
+  - true '[object Boolean]'
+  - null '[object Null]'
+  - undefined '[object Undefined]'
+  - [1,3,5] '[object Array]'
+  - function(){}  '[object Function]'
+  - new Date()   '[object Date]'
+  - /abc/        '[object RegExp]'
+- Array.isArray()  es5中提出来的检测数组
+- isNaN()
+- isInfinity()
+
+## 指向window
+
+```js
+$.ajax({
+  success:function(){
+    console.log(this);        // window
+  }
+})
+```
+
+```js
+[1,3,5].map(function(){
+  console.log(this);      // window
+})
+```
+
+```js
+  $("div")
+
+  `${$}`
+  `${$('div')}`
+```
+
+## global和window的区别
+
+- global是es中全局作用域中的根对象
+  - 但是nodejs里面，global全是表示全局变量的载体
+  - 浏览器端的js里面，全局变量都放在了window中，浏览器中不存在global对象
