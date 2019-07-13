@@ -1362,6 +1362,10 @@ document.body 和 document.documentElement，同样的属性用 document.body �
 
 ### jquery
 
+- jQuery原理：封装常用的方法，有助于快速开发，并且兼容所有浏览器(V2/V3 不兼容低版本浏览器)
+  - 刚开始做前段项目的时候大量使用jQuery，但是最近几年都使用MVVM框架，JQ中常用的方法忘的差不多了。jQuery就是一个类，而$()就是创建这个类的一个实例，这个实例是基于内置方法makeArray的类数组。JQ提供的方法有两部分，一部分是放到原型上的，供实例调取使用，一部分是放到对象上的，直接$.xxx调取使用，想要后期自己扩展方法（包括基于jQuery写插件），都基于extend这个方法扩展。
+  - jQuery提供了动画、时间、Ajax等常用的方法，使用的时候比较注重一些封装和编程的思想。例如：发布订阅设计模式就是一句jQuery的`$.callback`学习研究的。
+
 在 jQuery 中，`width()`方法用于获得元素宽度；`innerWidth()`方法用于获得`包括内边界（padding）的元素宽度，outerWidth()方法用于获得包括内边界(padding)和边框(border)的元素宽度`，如果`outerWidth()`方法的参数为 true 则`外边界`(margin)也会被包括进来，即获得包括外边框(margin)、内边界(padding)和边框(border)的元素宽度。同理，innerHeight 方法与 outerHeight 方法也是用同样的方法计算相应的高度。
 
 所以说：对于同一个元素应该是：`width()<=innerWidth()<=outerWidth()<=outerWidth(true);`
