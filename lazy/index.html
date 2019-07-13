@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>图片懒加载</title>
+    <style>
+      .preload-wrapper {
+        width: 974px;
+        height: 350px;
+        margin: 20px auto;
+        background: #fff url("./load.gif") no-repeat center center;
+        background-size: 100px 80px;
+      }
+      .preload-wrapper img {
+        display: none; /*开始图片没有加载，先隐藏；真实图片加载完成之后显示*/
+        width: 100%;
+        height: 100%;
+      }
+      .preload-wrapper img.on {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="preload-wrapper">
+      <img
+        src=""
+        alt="秒杀图片"
+        data-src="http://img.static.gqsj.cc/banner/2018-07-06/20180706188456.png"
+      />
+    </div>
+    <div class="preload-wrapper">
+      <img
+        src=""
+        alt="招聘"
+        data-src="http://img.static.gqsj.cc/banner/119/zhaomu.jpg@720w_198h_1e_1c_99q_1o"
+      />
+    </div>
+    <div class="preload-wrapper">
+      <img
+        src=""
+        alt="信息连发"
+        data-src="http://img.static.gqsj.cc/banner/2018-12-26/1545802548_96186.jpg@720w_198h_1e_1c_99q_1o"
+      />
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      // 页面加载完成(结构、数据、DOM等加载完成)
+      // window.onload = function(){}
+
+      // 设置定时器：间隔多长时间后在加载真实图片（定时器是异步的，所以定时器能执行，也代表页面加载完成）
+      $(document).ready(function() {
+        let preloadWrapper = document.querySelectorAll(".preload-wrapper");
+        let imgs = [];
+        preloadWrapper.forEach(item => {
+          imgs.push(item.querySelector("img"));
+        });
+
+        console.log(preloadWrapper);
+        console.log(imgs);
+
+        setTimeout(() => {
+          imgs.forEach(item => {
+            let src = item.getAttribute("data-src");
+            // item.src = src
+            // item.className = "on";
+
+            // 图片不存在解决方案
+            // 验证图片是否存在
+            // 创建临时image
+            // let tmpImg = document.createElement('img')
+            let tmpImg = new Image();
+            tmpImg.src = src;
+            tmpImg.onload = function() {
+              // 图片加载成功
+              item.src = src;
+              item.className = "on";
+              tmpImg = null;
+            };
+            tmpImg.src = src; // 部分IE浏览器中只有把SRC赋值放到onload下面才能起到作用
+          });
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>
