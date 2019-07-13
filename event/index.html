@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container">
+      <div id="box">
+        <input type="text" id="input" />
+      </div>
+    </div>
+    <style>
+      #container {
+        width: 600px;
+        height: 600px;
+        background: green;
+      }
+      #box {
+        width: 200px;
+        height: 200px;
+        background: red;
+      }
+    </style>
+    <script>
+      function $(o) {
+        return document.getElementById(o);
+      }
+      window.onload = function(ev) {
+        console.log("Event事件对象：", ev);
+        $("container").onclick = function(e) {
+          console.log(this.id + ": 5:clicked");
+          console.log("MouseEvent对象：", e);
+        };
+        $("container").ondblclick = function() {
+          console.log(this.id + ": dblclicked");
+        };
+        $("container").onmouseover = function() {
+          console.log(this.id + ": 1:moveover");
+        };
+        $("container").onmouseout = function() {
+          console.log(this.id + ": 6:mouseout");
+        };
+        $("container").onmouseenter = function() {
+          console.log(this.id + ": 2:mouseenter");
+        };
+        $("container").onmousedown = function(e) {
+          console.log("KeyboardEvent对象：", e);
+          console.log(this.id + ": 3:mousedown");
+        };
+        $("container").onmouseup = function() {
+          console.log(this.id + ": 4:mouseup");
+        };
+        $("container").onmousemove = function() {
+          console.log(this.id + ": mousemove");
+        };
+        $("container").onmousewheel = function() {
+          console.log(this.id + ": mousewheel");
+        };
+
+        ///////////////////////
+        $("input").oninput = function() {
+          console.log(this.id + ": input");
+        };
+        $("input").onkeydown = function(e) {
+          e = e || window.event;
+          let val = this.value.trim(); // 不兼容
+          this.value = this.value.replace(/^ +| +$/g, "");
+          let len = val.length;
+          if (len >= 6) {
+            this.value = val.substr(0, 6);
+            // 阻止默认行为去除特殊按键(delete/backspace/方向键)
+            let code = e.which || e.keyCode;
+            if (!/^(46|8|37|38|39|40)$/.test(code)) {
+              e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+            }
+          }
+        };
+      };
+    </script>
+  </body>
+</html>
