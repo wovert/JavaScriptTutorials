@@ -28,37 +28,46 @@
       function $(o) {
         return document.getElementById(o);
       }
+      window.onclick = function() {
+        console.log("window: clicked");
+      };
+      document.documentElement.onclick = function() {
+        console.log("documentElement: clicked");
+      };
+      document.body.onclick = function() {
+        console.log("body: clicked");
+      };
       window.onload = function(ev) {
-        console.log("Event事件对象：", ev);
+        // console.log("Event事件对象：", ev);
         $("container").onclick = function(e) {
           console.log(this.id + ": 5:clicked");
           console.log("MouseEvent对象：", e);
         };
-        $("container").ondblclick = function() {
-          console.log(this.id + ": dblclicked");
-        };
-        $("container").onmouseover = function() {
-          console.log(this.id + ": 1:moveover");
-        };
-        $("container").onmouseout = function() {
-          console.log(this.id + ": 6:mouseout");
-        };
-        $("container").onmouseenter = function() {
-          console.log(this.id + ": 2:mouseenter");
-        };
-        $("container").onmousedown = function(e) {
-          console.log("KeyboardEvent对象：", e);
-          console.log(this.id + ": 3:mousedown");
-        };
-        $("container").onmouseup = function() {
-          console.log(this.id + ": 4:mouseup");
-        };
-        $("container").onmousemove = function() {
-          console.log(this.id + ": mousemove");
-        };
-        $("container").onmousewheel = function() {
-          console.log(this.id + ": mousewheel");
-        };
+        // $("container").ondblclick = function() {
+        //   console.log(this.id + ": dblclicked");
+        // };
+        // $("container").onmouseover = function() {
+        //   console.log(this.id + ": 1:moveover");
+        // };
+        // $("container").onmouseout = function() {
+        //   console.log(this.id + ": 6:mouseout");
+        // };
+        // $("container").onmouseenter = function() {
+        //   console.log(this.id + ": 2:mouseenter");
+        // };
+        // $("container").onmousedown = function(e) {
+        //   console.log("KeyboardEvent对象：", e);
+        //   console.log(this.id + ": 3:mousedown");
+        // };
+        // $("container").onmouseup = function() {
+        //   console.log(this.id + ": 4:mouseup");
+        // };
+        // $("container").onmousemove = function() {
+        //   console.log(this.id + ": mousemove");
+        // };
+        // $("container").onmousewheel = function() {
+        //   console.log(this.id + ": mousewheel");
+        // };
 
         ///////////////////////
         $("input").oninput = function() {
@@ -77,6 +86,14 @@
               e.preventDefault ? e.preventDefault() : (e.returnValue = false);
             }
           }
+        };
+
+        // 冒泡传播
+        $("box").onclick = function(e) {
+          e = e || window.event;
+          console.log(this.id + ": clicked");
+          console.log(e.path);
+          console.log(e);
         };
       };
     </script>

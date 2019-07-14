@@ -38,6 +38,14 @@
   - `blur`：失去焦点
   - `change`：修改内容
 
+### mouseenter 与 mouseover 区别
+
+- over 属于滑过（覆盖）事件，从父元素进入到子元素，属于离开了父元素，会触发父元素的 out，触发子元素的 over
+- enter 属于进入，从父元素进入子元素，并不算离开父元素，不会触发元素的 leave，触发子元素的 enter
+- enter 和 leave 阻止了事件的冒泡传播，而 over 和 out 还存在冒泡传播的
+
+- 所以对于父元素的嵌套子元素，使用 over 会发生很多不愿意操作的事情，此时使用 enter 会更加简单，真实项目中 enter 的使用比 over 多
+
 ## 事件绑定
 
 > 给元素天生自带的事件行为绑定方法，当事件触发，会把对应的方法执行
@@ -121,3 +129,47 @@ e.pageX =
     - `<a href="javascript:0/undefiend/null"></a>`
     - `link.onclick = function(e){e = e || window.event; e.preventDefault ? e.preventDefault() : e.returnValue = false}`
       - click 事件绑定方法，当点击 A 标签时，先触发 click 事件，其次才会执行自己的默认行为
+
+## 事件的传播机制
+
+### 捕获阶段
+
+> 最外层开始向内查找（找到操作的事件源），查找的目的是，构建出冒泡传播阶段需要传播的路线（查找就是按照 HTML 层级结构找的）
+
+`e.path` 是捕获阶段规划出来的结构
+
+### 目标阶段
+
+> 事件源的相关操作行为触发（如果绑定了方法，则把方法执行）
+
+### 冒泡传播
+
+> 按照捕获阶段规划的路线，自内而外，把当前事件源的祖先元素的相关事件行为依次触发（如果某一祖先元素事件行为绑定了方法，则把方法执行，没绑定方法，行为触发了，什么都不错，继续向上传播即可）
+> 触发当前元素的某一个事件（点击事件）行为，不仅当前元素事件行为触发，而且其祖先元素的先关事件行为也会依次被触发，这种机制就是**事件的冒泡传播机制**
+
+#### 冒泡顺序
+
+> 按照 HTMl 结构进行冒泡，跟显示位置没有关系
+
+- 1.当前元素
+
+  - 2.父元素
+    - 3.父 n 元素
+      - 4.body 元素
+        - 5.documentElement 元素
+          - 6.window 元素
+
+- `Event.prototype`
+  - `NONE: 0` 什么都没做
+  - `CAPTURING_PHASE: 1` 捕获阶段
+  - `AT_ATRGET: 2` 目标阶段
+  - `BUBBLInG_PHASE: 3` 冒泡阶段
+
+`[element].onEvent = callback` DOM0 事件绑定，给元素的事件行为绑定方法，这个方法都是当前元素事件行为的冒泡阶段（或者目标阶段）执行的
+
+`[element].addEventListener(element, callback, false)` 第三个参数 `false` 也是控制绑定方法在事件在事件传播的冒泡阶段（或者目标阶段）执行；相反第三个参数为`true`才会让当前方法在事件传播的捕获阶段触发执行（这种捕获阶段执行没有意义，项目中不使用）
+
+- 不同浏览器对于最外层祖先元素的定义不一样
+  - Chrome: window->document->html->body
+  - IE+: window->html->body
+  - IE-: html->body
