@@ -1,38 +1,37 @@
-var name = 'wovert'
-var age = 18
-var gender = 'girl'
+var name = "wovert";
+var age = 18;
+var gender = "girl";
 
-var name = 'lingyima'
-var age = 81
-var gender = 'boy'
+var name = "lingyima";
+var age = 81;
+var gender = "boy";
 
 var person1 = {
-  name: 'wovert',
+  name: "wovert",
   age: 18
-}
+};
 
 var person2 = {
-  name: 'lingyima',
+  name: "lingyima",
   age: 81
-}
+};
 
-
-**
+/**
  * 单利模式
  */
-var xiaowang = (function(argument){
-  var xiaowangjia = function(message){
+var xiaowang = (function(argument) {
+  var xiaowangjia = function(message) {
     this.menling = message;
-  }
+  };
   var men;
   var info = {
-    sendMessage : function(message){
-      if(!men) {
+    sendMessage: function(message) {
+      if (!men) {
         men = new xiaowangjia(message);
       }
       return men;
     }
-  }
+  };
   return info;
 })();
 
@@ -43,8 +42,8 @@ var xiaoli = {
     console.log(_xw.menling);
     _wx = null; // 等待垃圾回收
   }
-}
-xiaoli.callXiaowang('滴滴');
+};
+xiaoli.callXiaowang("滴滴");
 
 /************************/
 
@@ -53,48 +52,48 @@ xiaoli.callXiaowang('滴滴');
 // d e f => banner
 
 var top = {
-  init: function(){
+  init: function() {
     this.render();
     this.bind();
   },
   a: 4,
-  render: function(){
+  render: function() {
     var me = this;
-    me.btna = document.getElementById('a');
+    me.btna = document.getElementById("a");
   },
-  bind: function(){
+  bind: function() {
     var me = this;
-    me.btna.click(function(){
+    me.btna.click(function() {
       // 业务逻辑取出去
       me.test();
     });
   },
-  test: function(){
-    a = 5
+  test: function() {
+    a = 5;
   }
-}
+};
 var banner = {
-  init: function(){
+  init: function() {
     this.render();
     this.bind();
   },
   a: 4,
-  render: function(){
+  render: function() {
     var me = this;
-    me.btna = document.getElementById('d');
+    me.btna = document.getElementById("d");
   },
-  bind: function(){
+  bind: function() {
     var me = this;
-    me.btna.click(function(){
+    me.btna.click(function() {
       // 业务逻辑取出去
       me.test();
     });
   },
-  test: function(){
+  test: function() {
     a = 5;
     top.a = 6;
   }
-}
+};
 
 top.init();
 banner.init();
