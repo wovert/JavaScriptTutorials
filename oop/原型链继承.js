@@ -1,15 +1,18 @@
-function Tiger(){
-
+// 原型继承：子类的原型继承执行父类的一个实例
+function A() {
+	this.x = 100;
 }
-Tiger.prototype={
-    a:function(){
-        
-    },
-    b:function(){
 
-    }
+A.prototype = {
+	constructor: A,
+	getX: function () {
+		console.log(this.x)
+	}
 }
-//创建tiger实例，此时的tiger实例的原型对象是新原型，所以tiger可以访问到新原型中的属性和方法(a/b)
-var tiger=new Tiger();
-console.log(tiger.a);
-console.log(tiger.b);
+
+function B() {
+	this.y = 200;
+}
+
+B.prototype = new A()
+let f = new B();
