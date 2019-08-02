@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <p id="p1">p1</p>
+  <p id="p2">p2</p>
+  <p id="p3">p3</p>
+  <script>
+    /**
+     * newEle: 新插入的元素
+     * originEle: 指定的老元素
+     * 插入到原有元素的后面，就是插入到原有元素弟弟的前面
+     */
+    function insertAfter(newEle, originEle) {
+      let next = originEle.nextElementSibling,
+          pa = originEle.parentNode
+      if (next) {
+        pa.insertBefore(newEle, next)
+      } else {
+        pa.appendChild(newEle) 
+      }
+    }
+    window.onload = function() {
+      let link = document.createElement('a');
+      let text = document.createTextNode('链接')
+      link.appendChild(text);
+      let p2 = document.getElementById('p2')
+      insertAfter(link, p2)
+    }
+  </script>
+</body>
+</html>
